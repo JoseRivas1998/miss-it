@@ -3,6 +3,7 @@ package com.tcg.missit;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector2;
 import com.tcg.missit.managers.*;
@@ -30,6 +31,9 @@ public class Game extends ApplicationAdapter {
 		
 		SIZE.set(width, height);
 		CENTER.set(width * .5f, height * .5f);
+		
+		res = new Content();
+		res.loadBitmapFont("font", "atari full.ttf", "main", 56, Color.BLACK);
 		
 		time = 0;
 		fps = 0;
