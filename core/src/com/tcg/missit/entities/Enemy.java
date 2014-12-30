@@ -60,10 +60,12 @@ public class Enemy extends Entity {
 	}
 	
 	private void bounceX() {
+		Game.res.getSound("bounce").play();
 		vel.x *= -1;
 	}
 	
 	private void bounceY() {
+		Game.res.getSound("bounce").play();
 		vel.y *= -1;
 	}
 	

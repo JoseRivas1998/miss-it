@@ -41,6 +41,9 @@ public class Game extends ApplicationAdapter {
 		
 		res = new Content();
 		res.loadBitmapFont("font", "atari full.ttf", "main", 24, Color.BLACK);
+
+		res.loadSound("sound", "bounce.wav", "bounce");
+		res.loadSound("sound", "spawn.wav", "spawn");
 		
 		time = 0;
 		fps = 0;
@@ -120,6 +123,7 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void dispose() {
 		gsm.dispose();
+		res.removeAll();
 		s.setHighScore(HIGH);
 		try {
 			FileOutputStream fileOut = new FileOutputStream("save.dat");

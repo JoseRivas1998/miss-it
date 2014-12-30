@@ -53,6 +53,9 @@ public class PlayState extends GameState {
 		if(eTime >= eTimer) {
 			eTimer *= 2;
 			eTime = 0;
+			if(e.size > 0) {
+				Game.res.getSound("spawn").play();
+			}
 			e.add(new Enemy());
 		}
 		if(time >= 1) {
