@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 public class Content {
@@ -14,11 +15,13 @@ public class Content {
 	private HashMap<String, Music> music;
 	private HashMap<String, Sound> sound;
 	private HashMap<String, BitmapFont> font;
+	private GlyphLayout gl;
 	
 	public Content() {
 		music = new HashMap<String, Music>();
 		sound = new HashMap<String, Sound>();
 		font = new HashMap<String, BitmapFont>();
+		gl = new GlyphLayout();
 	}
 	
 	/*
@@ -62,8 +65,10 @@ public class Content {
 	@SuppressWarnings("deprecation")
 	public void loadBitmapFont(String folder, String path, String key, int size, Color color) {
 		FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal(folder + "/" + path));
-		BitmapFont bmf = gen.generateFont(size);
-		bmf.setColor(color);
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.color = color;
+        parameter.size = size;
+		BitmapFont bmf = gen.generateFont(parameter);
 		font.put(key, bmf);
 		gen.dispose();
 	}
@@ -72,13 +77,15 @@ public class Content {
 		return font.get(key);
 	}
 
-	public float getWidth(String key, String s) {
-		return font.get(key).getBounds(s).width;
-	}
-	
-	public float getHeight(String key, String s) {
-		return font.get(key).getBounds(s).height - font.get(key).getDescent();
-	}
+    public float getWidth(String key, String s) {
+        gl.setText(font.get(key), s);
+        return gl.width;
+    }
+
+    public float getHeight(String key, String s) {
+        gl.setText(font.get(key), s);
+        return gl.height - font.get(key).getDescent();
+    }
 	
 	/*
 	 * Other
